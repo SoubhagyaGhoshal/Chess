@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev", 
+    "dev": "turbo dev",
     "lint": "turbo run lint",
     "lint:fix": "turbo lint:fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -26,16 +26,5 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx,md}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
-  }
+  ]
 }
