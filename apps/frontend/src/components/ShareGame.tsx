@@ -7,7 +7,7 @@ export const ShareGame = ({ className, gameId }: { className?: string; gameId: s
 
   const handleCopy = () => {
     window.navigator.clipboard.writeText(url);
-    setCopied((p) => true);
+    setCopied(() => true);
   };
 
   return (
