@@ -19,7 +19,11 @@ app.use(
     secret: process.env.COOKIE_SECRET || 'keyboard cat',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: COOKIE_MAX_AGE },
+    cookie: { 
+      secure: process.env.NODE_ENV === 'production', 
+      maxAge: COOKIE_MAX_AGE,
+      sameSite: 'lax'
+    },
   }),
 );
 

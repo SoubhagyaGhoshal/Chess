@@ -8,7 +8,7 @@ const router = Router();
 
 const CLIENT_URL =
   process.env.AUTH_REDIRECT_URL ?? 'http://localhost:5173/game/random';
-const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
+const JWT_SECRET = process.env.JWT_SECRET || 'mUBBTFY4hICipnOH9uw3bNQnVw2axBe64zw9vKjr+0A=';
 
 interface userJwtClaims {
   userId: string;
@@ -47,7 +47,11 @@ router.post('/guest', async (req: Request, res: Response) => {
     token: token,
     isGuest: true,
   };
-  res.cookie('guest', token, { maxAge: COOKIE_MAX_AGE });
+  res.cookie('guest', token, { 
+    maxAge: COOKIE_MAX_AGE,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax'
+  });
   res.json(UserDetails);
 });
 
@@ -82,7 +86,11 @@ router.get('/refresh', async (req: Request, res: Response) => {
       token: token,
       isGuest: true,
     };
-    res.cookie('guest', token, { maxAge: COOKIE_MAX_AGE });
+    res.cookie('guest', token, { 
+      maxAge: COOKIE_MAX_AGE,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
+    });
     res.json(User);
   } else {
     res.status(401).json({ success: false, message: 'Unauthorized' });

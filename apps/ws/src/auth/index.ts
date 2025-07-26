@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
+const JWT_SECRET = process.env.JWT_SECRET || 'mUBBTFY4hICipnOH9uw3bNQnVw2axBe64zw9vKjr+0A=';
 
 export interface userJwtClaims {
   userId: string;
