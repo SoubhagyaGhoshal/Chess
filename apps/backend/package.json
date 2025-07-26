@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npx prisma generate && tsc",
     "start": "node dist/index.js",
     "dev": "npm run build && npm run start",
     "lint": "eslint . --ext .ts --max-warnings 0",
@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@repo/db": "*",
+    "@prisma/client": "^5.12.1",
     "@types/express-session": "^1.18.0",
     "@types/passport": "^1.0.16",
     "@types/passport-google-oauth20": "^2.0.16",
@@ -30,6 +30,7 @@
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
+    "prisma": "^5.12.0",
     "typescript": "^5.0.0",
     "uuid": "^9.0.1"
   },

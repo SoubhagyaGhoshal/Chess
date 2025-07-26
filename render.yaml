@@ -4,9 +4,8 @@ services:
     env: node
     plan: free
     nodeVersion: 18
-    packageManager: yarn
-    buildCommand: yarn install && yarn workspace backend build
-    startCommand: yarn workspace backend start
+    buildCommand: cd apps/backend && npm install && npm run build
+    startCommand: cd apps/backend && npm start
     rootDir: .
     envVars:
       - key: NODE_ENV
