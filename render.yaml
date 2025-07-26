@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: chess-backend
+    env: node
+    plan: free
+    nodeVersion: 18
+    packageManager: yarn
+    buildCommand: yarn install && yarn workspace backend build
+    startCommand: yarn workspace backend start
+    rootDir: .
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: ALLOWED_HOSTS
+        sync: false 
