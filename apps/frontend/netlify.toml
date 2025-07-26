@@ -5,6 +5,8 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  # Production URLs - only used during Netlify builds
+  # For local development, use .env file
   VITE_APP_BACKEND_URL = "https://chess-2-y063.onrender.com"
   VITE_APP_WS_URL = "wss://chess-ws-qvcs.onrender.com"
 
