@@ -13,9 +13,9 @@ services:
       - key: PORT
         value: 3000
       - key: JWT_SECRET
-        generateValue: true
+        value: "chessdemo-production-secret-key-2024"
       - key: COOKIE_SECRET
-        generateValue: true
+        value: "chessdemo-cookie-secret-key-2024"
       - key: DATABASE_URL
         sync: false
       - key: ALLOWED_HOSTS
@@ -35,6 +35,8 @@ services:
       - key: PORT
         value: 8080
       - key: JWT_SECRET
-        generateValue: true
+        value: "chessdemo-production-secret-key-2024"
       - key: DATABASE_URL
-        sync: false 
+        sync: false
+      - key: COOKIE_SECRET
+        value: "chessdemo-cookie-secret-key-2024" 
