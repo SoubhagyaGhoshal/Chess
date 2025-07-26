@@ -19,7 +19,7 @@ services:
       - key: DATABASE_URL
         sync: false
       - key: ALLOWED_HOSTS
-        sync: false
+        value: "https://chesssoubhagya.netlify.app,http://localhost:5173"
 
   - type: web
     name: chess-ws
