@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { useRecoilState } from 'recoil';
-import { userAtom, BACKEND_URL } from '@repo/store/userAtom';
+import { userAtom } from '@repo/store/userAtom';
+import { BACKEND_URL } from '../config';
 
 const Login = () => {
   const navigate = useNavigate();

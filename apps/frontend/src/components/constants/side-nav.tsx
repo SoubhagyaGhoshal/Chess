@@ -1,5 +1,5 @@
 import { PuzzleIcon, LogInIcon, LogOutIcon, SettingsIcon } from 'lucide-react';
-import { BACKEND_URL } from '@repo/store/userAtom';
+import { BACKEND_URL } from '../../config';
 export const UpperNavItems = [
   {
     title: 'Play',
