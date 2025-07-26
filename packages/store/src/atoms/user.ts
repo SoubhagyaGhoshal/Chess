@@ -1,7 +1,7 @@
 import { atom, selector } from 'recoil';
 
-// Backend URL - can be overridden by environment variable
-export const BACKEND_URL = process.env.VITE_APP_BACKEND_URL || 'http://localhost:3000';
+// Backend URL for production
+export const BACKEND_URL = 'https://chess-2-y063.onrender.com';
 export interface User {
   token: string;
   id: string;
