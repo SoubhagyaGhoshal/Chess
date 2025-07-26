@@ -6,7 +6,7 @@
 [build.environment]
   NODE_VERSION = "18"
   VITE_APP_BACKEND_URL = "https://chess-2-y063.onrender.com"
-  VITE_APP_WS_URL = "wss://chess-2-y063.onrender.com"
+  VITE_APP_WS_URL = "wss://chess-ws-qvcs.onrender.com"
 
 [[redirects]]
   from = "/*"
