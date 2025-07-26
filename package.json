@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "cd apps/backend && npm install --production=false && npm run build",
+    "start": "cd apps/backend && npm start",
     "dev": "turbo dev",
     "lint": "turbo run lint",
     "lint:fix": "turbo lint:fix",
