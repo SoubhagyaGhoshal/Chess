@@ -3,7 +3,7 @@ services:
     name: chess-backend
     env: node
     plan: free
-    buildCommand: npm run build
+    buildCommand: npm install && npm run build
     startCommand: npm start
     rootDir: apps/backend
     envVars:
