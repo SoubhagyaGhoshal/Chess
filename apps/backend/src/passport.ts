@@ -1,7 +1,6 @@
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const GithubStrategy = require('passport-github2').Strategy;
 import passport from 'passport';
-import dotenv from 'dotenv';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Strategy as GithubStrategy } from 'passport-github2';
 import { db } from './db';
 
 interface GithubEmailRes {
@@ -11,15 +10,10 @@ interface GithubEmailRes {
   visibility: 'private' | 'public';
 }
 
-dotenv.config();
-const GOOGLE_CLIENT_ID =
-  process.env.GOOGLE_CLIENT_ID || 'your_google_client_id';
-const GOOGLE_CLIENT_SECRET =
-  process.env.GOOGLE_CLIENT_SECRET || 'your_google_client_secret';
-const GITHUB_CLIENT_ID =
-  process.env.GITHUB_CLIENT_ID || 'your_github_client_id';
-const GITHUB_CLIENT_SECRET =
-  process.env.GITHUB_CLIENT_SECRET || 'your_github_client_secret';
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
 export function initPassport() {
   if (
@@ -83,7 +77,7 @@ export function initPassport() {
             Authorization: `token ${accessToken}`,
           },
         });
-        const data: GithubEmailRes[] = await res.json();
+        const data = await res.json() as GithubEmailRes[];
         const primaryEmail = data.find((item) => item.primary === true);
 
         const user = await db.user.upsert({
