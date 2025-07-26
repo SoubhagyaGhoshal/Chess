@@ -19,4 +19,22 @@ services:
       - key: DATABASE_URL
         sync: false
       - key: ALLOWED_HOSTS
+        sync: false
+
+  - type: web
+    name: chess-ws
+    env: node
+    plan: free
+    nodeVersion: 18
+    buildCommand: cd apps/ws && npm install --production=false && npm run build
+    startCommand: cd apps/ws && npm start
+    rootDir: .
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8080
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
         sync: false 
