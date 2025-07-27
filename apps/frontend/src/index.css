@@ -70,12 +70,72 @@
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground;
+  
+  /* CSS Reset and Browser Compatibility Fixes */
+  html {
     /* Fix for -webkit-text-size-adjust warning */
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    /* Prevent horizontal scrollbar */
+    overflow-x: hidden;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    /* Additional browser compatibility */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent text size adjustment on orientation change */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Fix for -moz-column-gap warnings */
+  .column-gap {
+    column-gap: 1rem;
+  }
+  
+  /* Ensure proper box-sizing */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* Remove default margins and paddings */
+  body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Remove list styles */
+  ul, ol {
+    list-style: none;
+  }
+  
+  /* Remove text decoration from links */
+  a {
+    text-decoration: none;
+  }
+  
+  /* Make images responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Remove default button styles */
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  /* Remove default input styles */
+  input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
   }
 }
 
@@ -92,5 +152,12 @@
   .no-scrollbar {
       -ms-overflow-style: none;  /* IE and Edge */
       scrollbar-width: none;  /* Firefox */
-}
+  }
+  
+  /* Fix for column-gap compatibility */
+  .column-gap-fix {
+    column-gap: 1rem;
+    -webkit-column-gap: 1rem;
+    -moz-column-gap: 1rem;
+  }
 }

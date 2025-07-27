@@ -1,0 +1,47 @@
+/* Browser Compatibility Fixes */
+
+/* Fix for -webkit-text-size-adjust warnings */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Fix for -moz-column-gap warnings */
+.column-gap {
+  column-gap: 1rem;
+}
+
+/* Modern CSS properties with fallbacks */
+.text-size-adjust {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Ensure proper vendor prefixes for column-gap */
+.column-gap-fix {
+  column-gap: 1rem;
+  -webkit-column-gap: 1rem;
+  -moz-column-gap: 1rem;
+}
+
+/* Additional browser compatibility fixes */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent text size adjustment on orientation change */
+@media screen and (max-width: 768px) {
+  html, body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+} 
