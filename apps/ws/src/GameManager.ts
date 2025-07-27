@@ -14,10 +14,19 @@ import {
   EXIT_GAME,
 } from './messages';
 import { Game, isPromoting } from './Game';
-import { db } from './db';
 import { socketManager, User } from './SocketManager';
 import { Square } from 'chess.js';
-import { GameStatus } from '@prisma/client';
+
+// Define GameStatus enum locally instead of importing from Prisma
+enum GameStatus {
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  DRAW = 'DRAW',
+  CHECKMATE = 'CHECKMATE',
+  STALEMATE = 'STALEMATE',
+  RESIGNATION = 'RESIGNATION',
+  TIME_UP = 'TIME_UP'
+}
 
 export class GameManager {
   private games: Game[];
@@ -117,28 +126,17 @@ export class GameManager {
         }
 
         let availableGame = this.games.find((game) => game.gameId === gameId);
-        const gameFromDb = await db.game.findUnique({
-          where: { id: gameId },
-          include: {
-            moves: {
-              orderBy: {
-                moveNumber: 'asc',
-              },
-            },
-            blackPlayer: true,
-            whitePlayer: true,
-          },
-        });
 
         // There is a game created but no second player available
-        
         if (availableGame && !availableGame.player2UserId) {
           socketManager.addUser(user, availableGame.gameId);
           await availableGame.updateSecondPlayer(user.userId);
           return;
         }
 
-        if (!gameFromDb) {
+        // For now, if game is not found in memory, return game not found
+        // This simplifies the WebSocket server and removes database dependency
+        if (!availableGame) {
           user.socket.send(
             JSON.stringify({
               type: GAME_NOT_FOUND,
@@ -147,54 +145,20 @@ export class GameManager {
           return;
         }
 
-        if(gameFromDb.status !== GameStatus.IN_PROGRESS) {
-          user.socket.send(JSON.stringify({
-            type: GAME_ENDED,
-            payload: {
-              result: gameFromDb.result,
-              status: gameFromDb.status,
-              moves: gameFromDb.moves,
-              blackPlayer: {
-                id: gameFromDb.blackPlayer.id,
-                name: gameFromDb.blackPlayer.name,
-              },
-              whitePlayer: {
-                id: gameFromDb.whitePlayer.id,
-                name: gameFromDb.whitePlayer.name,
-              },
-            }
-          }));
-          return;
-        }
-
-        if (!availableGame) {
-          const game = new Game(
-            gameFromDb?.whitePlayerId!,
-            gameFromDb?.blackPlayerId!,
-            gameFromDb.id,
-            gameFromDb.startAt,
-          );
-          game.seedMoves(gameFromDb?.moves || []);
-          this.games.push(game);
-          availableGame = game;
-        }
-
-        console.log(availableGame.getPlayer1TimeConsumed());
-        console.log(availableGame.getPlayer2TimeConsumed());
-
+        // Game found in memory, join it
         user.socket.send(
           JSON.stringify({
             type: GAME_JOINED,
             payload: {
               gameId,
-              moves: gameFromDb.moves,
+              moves: availableGame.board.history({ verbose: true }),
               blackPlayer: {
-                id: gameFromDb.blackPlayer.id,
-                name: gameFromDb.blackPlayer.name,
+                id: availableGame.player2UserId || 'unknown',
+                name: 'Player 2',
               },
               whitePlayer: {
-                id: gameFromDb.whitePlayer.id,
-                name: gameFromDb.whitePlayer.name,
+                id: availableGame.player1UserId,
+                name: 'Player 1',
               },
               player1TimeConsumed: availableGame.getPlayer1TimeConsumed(),
               player2TimeConsumed: availableGame.getPlayer2TimeConsumed(),
