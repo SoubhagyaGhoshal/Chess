@@ -5,7 +5,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'mUBBTFY4hICipnOH9uw3bNQnVw2axBe64zw9vKjr+0A=';
+// Use the same JWT secret as the backend for production
+const JWT_SECRET = process.env.JWT_SECRET || 'chessdemo-production-secret-key-2024';
 
 export interface userJwtClaims {
   userId: string;
