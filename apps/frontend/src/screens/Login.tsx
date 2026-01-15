@@ -2,8 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { userAtom } from '@repo/store/userAtom';
+import { API_URL } from '../config';
 
-const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL ?? 'http://localhost:3000';
+const BACKEND_URL = API_URL;
+
 
 const Login = () => {
   const navigate = useNavigate();

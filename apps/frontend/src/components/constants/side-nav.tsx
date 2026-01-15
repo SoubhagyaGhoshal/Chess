@@ -1,6 +1,8 @@
 import { PuzzleIcon, LogInIcon, LogOutIcon, SettingsIcon } from 'lucide-react';
-const BACKEND_URL =
-  import.meta.env.VITE_APP_BACKEND_URL ?? 'http://localhost:3000';
+import { API_URL } from '../../config';
+
+const BACKEND_URL = API_URL;
+
 export const UpperNavItems = [
   {
     title: 'Play',
