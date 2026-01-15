@@ -29,7 +29,7 @@ app.use(passport.authenticate('session'));
 
 const allowedHosts = process.env.ALLOWED_HOSTS
   ? process.env.ALLOWED_HOSTS.split(',')
-  : [];
+  : ['http://localhost:5173'];
 
 app.use(
   cors({
