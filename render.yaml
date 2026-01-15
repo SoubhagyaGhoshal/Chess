@@ -3,7 +3,7 @@ services:
   - type: web
     name: chess-backend
     env: node
-    buildCommand: cd apps/backend && npm install && npm run build
+    buildCommand: cd apps/backend && npm ci --omit=dev && npm run build
     startCommand: cd apps/backend && npm start
     envVars:
       - key: DATABASE_URL
@@ -13,16 +13,16 @@ services:
       - key: ALLOWED_HOSTS
         value: https://your-frontend-url.vercel.app
       - key: NODE_VERSION
-        value: 18.17.0
+        value: 20.11.0
 
   # WebSocket Server
   - type: web
     name: chess-websocket
     env: node
-    buildCommand: cd apps/ws && npm install && npx esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js
+    buildCommand: cd apps/ws && npm ci --omit=dev && npx esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js
     startCommand: cd apps/ws && node dist/index.js
     envVars:
       - key: DATABASE_URL
         sync: false
       - key: NODE_VERSION
-        value: 18.17.0
+        value: 20.11.0
